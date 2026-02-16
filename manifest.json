@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "Anti Brainrot",
+  "version": "1.0.0",
+  "description": "Reclaim your focus by removing YouTube's algorithmic distractions",
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "permissions": [
+    "storage",
+    "tabs",
+    "*://*.youtube.com/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_start"
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png"
+    },
+    "default_title": "Anti Brainrot Settings",
+    "default_popup": "popup.html"
+  }
+}

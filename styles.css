@@ -1,0 +1,52 @@
+/* Anti Brainrot - CSS Rules for hiding elements */
+
+/* Hide Homepage Feed */
+body.unhook-hide-homepage ytd-browse[page-subtype="home"] #contents,
+body.unhook-hide-homepage ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+body.unhook-hide-homepage ytd-browse[page-subtype="home"] ytd-two-column-browse-results-renderer #primary {
+  display: none !important;
+}
+
+/* Hide Sidebar Recommendations */
+body.unhook-hide-sidebar #related,
+body.unhook-hide-sidebar #secondary,
+body.unhook-hide-sidebar #secondary-inner,
+body.unhook-hide-sidebar ytd-watch-next-secondary-results-renderer,
+body.unhook-hide-sidebar #items.ytd-watch-next-secondary-results-renderer {
+  display: none !important;
+}
+
+/* Hide Comments Section */
+body.unhook-hide-comments ytd-comments#comments,
+body.unhook-hide-comments #comments,
+body.unhook-hide-comments ytd-item-section-renderer#sections > #contents > ytd-comments,
+body.unhook-hide-comments tp-yt-paper-dialog #comments {
+  display: none !important;
+}
+
+/* Hide End Screen Suggestions */
+body.unhook-hide-endscreen .ytp-ce-element,
+body.unhook-hide-endscreen .ytp-endscreen-content,
+body.unhook-hide-endscreen .ytp-ce-covering-overlay,
+body.unhook-hide-endscreen .ytp-ce-element-show,
+body.unhook-hide-endscreen .ytp-cards-teaser {
+  display: none !important;
+}
+
+/* Hide Shorts */
+body.unhook-hide-shorts ytd-reel-shelf-renderer,
+body.unhook-hide-shorts ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
+body.unhook-hide-shorts [is-shorts],
+body.unhook-hide-shorts ytd-guide-entry-renderer:has([title="Shorts"]),
+body.unhook-hide-shorts ytd-mini-guide-entry-renderer:has([aria-label="Shorts"]),
+body.unhook-hide-shorts #endpoint[title="Shorts"],
+body.unhook-hide-shorts a[href="/shorts"],
+body.unhook-hide-shorts ytd-rich-shelf-renderer[is-shorts] {
+  display: none !important;
+}
+
+/* Additional Shorts selectors for channel pages */
+body.unhook-hide-shorts ytd-reel-shelf-renderer,
+body.unhook-hide-shorts yt-tab-shape:has([tab-title="Shorts"]) {
+  display: none !important;
+}

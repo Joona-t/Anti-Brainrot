@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Anti Brainrot Settings</title>
+  <style>
+    :root {
+      --bg-primary: #ffd4d4;
+      --bg-secondary: #ffc2c9;
+      --bg-hover: #ffb3bd;
+      --text-primary: #d94967;
+      --text-secondary: #e87d96;
+      --border-color: #ffaec0;
+      --toggle-bg-off: #ffc2c9;
+      --toggle-bg-on: #ff6b9d;
+      --toggle-disabled: #ffe0e6;
+      --success-bg: #ffeef2;
+      --success-text: #d94967;
+    }
+
+    body.dark-mode {
+      --bg-primary: #3d1f29;
+      --bg-secondary: #4d2938;
+      --bg-hover: #5d3347;
+      --text-primary: #ffc2c9;
+      --text-secondary: #ffaec0;
+      --border-color: #6d3d56;
+      --toggle-bg-off: #5d3347;
+      --toggle-bg-on: #ff6b9d;
+      --toggle-disabled: #4d2938;
+      --success-bg: #4d2938;
+      --success-text: #ffaec0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 340px;
+      padding: 0;
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 14px;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.2s, color 0.2s;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-bottom: 2px solid var(--border-color);
+      background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 700;
+      margin: 0;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.5px;
+      text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+    }
+
+    .theme-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+      padding: 6px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+      width: 32px;
+      height: 32px;
+    }
+
+    .theme-toggle:hover {
+      background-color: var(--bg-hover);
+    }
+
+    .content {
+      padding: 16px 20px;
+    }
+
+    .master-toggle-section {
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .setting {
+      margin-bottom: 12px;
+      padding: 10px 0;
+      transition: opacity 0.2s;
+    }
+
+    .setting.disabled {
+      opacity: 0.4;
+    }
+
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .toggle-text {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .setting .toggle-text {
+      font-weight: 500;
+    }
+
+    /* Custom Toggle Switch */
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      position: absolute;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: var(--toggle-bg-off);
+      border-radius: 24px;
+      transition: background-color 0.2s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: transform 0.2s;
+      box-shadow: 0 2px 4px rgba(217, 73, 103, 0.3);
+    }
+
+    .toggle-switch input:checked + .slider {
+      background-color: var(--toggle-bg-on);
+    }
+
+    .toggle-switch input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    .toggle-switch input:disabled + .slider {
+      background-color: var(--toggle-disabled);
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .setting.disabled .slider {
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 16px;
+      padding: 8px 12px;
+      background-color: var(--success-bg);
+      border-radius: 6px;
+      color: var(--success-text);
+      text-align: center;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .status.show {
+      opacity: 1;
+    }
+
+    .footer {
+      padding: 12px 20px;
+      border-top: 2px solid var(--border-color);
+      font-size: 11px;
+      color: var(--text-secondary);
+      text-align: center;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1><span>🧠</span> Anti Brainrot</h1>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+      <span class="theme-icon" id="themeIcon">🌙</span>
+    </button>
+  </div>
+
+  <div class="content">
+    <div class="master-toggle-section">
+      <label class="toggle-label">
+        <span class="toggle-text">Extension Enabled</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="masterToggle" checked>
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="setting">
+      <label class="toggle-label">
+        <span class="toggle-text">Hide Homepage Feed</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="hideHomepage" checked>
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="setting">
+      <label class="toggle-label">
+        <span class="toggle-text">Hide Video Sidebar</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="hideSidebar" checked>
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="setting">
+      <label class="toggle-label">
+        <span class="toggle-text">Hide Comments</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="hideComments" checked>
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="setting">
+      <label class="toggle-label">
+        <span class="toggle-text">Hide End Screen Feed</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="hideEndscreen" checked>
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="setting">
+      <label class="toggle-label">
+        <span class="toggle-text">Hide Shorts</span>
+        <div class="toggle-switch">
+          <input type="checkbox" id="hideShorts" checked>
+          <span class="slider"></span>
+        </div>
+      </label>
+    </div>
+
+    <div class="status" id="status">Settings saved!</div>
+  </div>
+
+  <div class="footer">
+    Anti Brainrot v1.0.0
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
