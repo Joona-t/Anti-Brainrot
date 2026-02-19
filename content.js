@@ -1,3 +1,9 @@
+// Cross-browser compatibility
+if (typeof browser === "undefined") {
+  var browser = chrome;
+}
+
+
 /**
  * Anti Brainrot - Content Script
  * Manages hiding/showing YouTube elements based on user preferences

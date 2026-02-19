@@ -1,8 +1,8 @@
-# Anti Brainrot
+# Anti Brainrot (Chrome/Edge Version)
 
 **Reclaim your focus by removing YouTube's algorithmic distractions**
 
-A Firefox extension that removes distracting elements from YouTube to help you stay focused on the content you choose to watch.
+A Chrome/Edge extension that removes distracting elements from YouTube to help you stay focused on the content you choose to watch.
 
 ## Features
 
@@ -13,34 +13,33 @@ A Firefox extension that removes distracting elements from YouTube to help you s
 ✅ **Hide Shorts** - Remove shorts shelf, shorts button, and shorts tabs
 ✅ **Customizable Settings** - Toggle each feature on/off individually via popup
 
-## Installation (Firefox)
+## Installation
 
-### Method 1: Temporary Installation (for testing)
+### Method 1: Developer Mode (Chrome)
 
-1. Open Firefox
-2. Navigate to `about:debugging#/runtime/this-firefox`
-3. Click **"Load Temporary Add-on..."**
-4. Navigate to the `youtube-unhook` folder and select the `manifest.json` file
+1. Open Chrome and navigate to `chrome://extensions/`
+2. Enable **Developer mode** (toggle in top-right corner)
+3. Click **"Load unpacked"**
+4. Select the `anti-brainrot-chrome` folder
 5. Visit YouTube - all distractions should now be hidden!
 
-**Note:** Temporary extensions are removed when Firefox restarts.
+### Method 2: Developer Mode (Edge)
 
-### Method 2: Permanent Installation (unsigned)
+1. Open Edge and navigate to `edge://extensions/`
+2. Enable **Developer mode** (toggle in bottom-left)
+3. Click **"Load unpacked"**
+4. Select the `anti-brainrot-chrome` folder
+5. Visit YouTube - distractions removed!
 
-1. Open Firefox
-2. Type `about:config` in the address bar and press Enter
-3. Accept the warning
-4. Search for `xpinstall.signatures.required`
-5. Set it to `false` (double-click to toggle)
-6. Type `about:addons` in the address bar
-7. Click the gear icon ⚙️ → "Install Add-on From File..."
-8. Select the `manifest.json` file from the `youtube-unhook` folder
+### Method 3: Chrome Web Store (Future)
+
+This extension can be published to the Chrome Web Store for easier installation. Contact the developer for the published version.
 
 ## Usage
 
 ### Accessing Settings
 
-Click the extension icon in your Firefox toolbar to open the settings popup.
+Click the extension icon in your browser toolbar to open the settings popup.
 
 ### Customizing Features
 
@@ -52,8 +51,9 @@ Changes are saved automatically and applied immediately to all open YouTube tabs
 
 ## How It Works
 
-Anti Brainrot uses a content script with CSS classes to hide distracting elements:
+Anti Brainrot uses Manifest V3 with cross-browser compatibility:
 
+- **Browser Polyfill** - Automatically detects and uses Chrome or Firefox APIs
 - **Content Script** (`content.js`) - Monitors YouTube pages and applies hiding rules
 - **MutationObserver** - Detects navigation in YouTube's single-page app
 - **CSS Classes** (`styles.css`) - Hides elements using `display: none !important`
@@ -63,12 +63,25 @@ Anti Brainrot uses a content script with CSS classes to hide distracting element
 
 - **`storage`** - Save your toggle preferences
 - **`tabs`** - Reload YouTube tabs when settings change
-- **`*://*.youtube.com/*`** - Access YouTube pages to hide elements
+- **`*://*.youtube.com/*`** (host_permissions) - Access YouTube pages to hide elements
 
 ## Browser Compatibility
 
-- ✅ **Firefox** (Recommended - built for Firefox)
-- ⚠️ **Chrome/Edge** - May work but not officially supported (uses Manifest V2)
+- ✅ **Chrome** (Manifest V3)
+- ✅ **Edge** (Manifest V3)
+- ✅ **Brave** (Chromium-based, should work)
+- ✅ **Opera** (Chromium-based, should work)
+- ⚠️ **Firefox** - Use the Firefox-specific version instead (uses Manifest V2)
+
+## Differences from Firefox Version
+
+This Chrome version uses:
+- **Manifest V3** (instead of V2)
+- **Browser API polyfill** for cross-browser compatibility
+- **`host_permissions`** (separated from permissions in V3)
+- **`action`** field (instead of `browser_action`)
+
+All functionality remains identical to the Firefox version.
 
 ## Troubleshooting
 
@@ -78,35 +91,39 @@ Anti Brainrot uses a content script with CSS classes to hide distracting element
 - Check if YouTube has updated their HTML structure
 
 **Extension not loading?**
-- Ensure you selected the correct `manifest.json` file
-- Check Firefox's Browser Console (Ctrl+Shift+J) for errors
+- Ensure Developer mode is enabled
+- Make sure you selected the correct folder (not just manifest.json)
+- Check Chrome's Extensions page for error messages
 
 **Settings not saving?**
 - Check that the extension has storage permissions
-- Try re-loading the extension
+- Try re-loading the extension in Developer mode
+
+**Chrome says "This extension may soon no longer be supported"**
+- This warning appears for Manifest V2 extensions. This version uses V3, so you won't see this warning.
 
 ## Development
 
-This extension is designed to be beginner-friendly for learning JavaScript and browser extensions.
+This extension uses Manifest V3 and is compatible with Chrome, Edge, and other Chromium-based browsers.
 
 ### File Structure
 ```
-youtube-unhook/
-├── manifest.json          # Extension configuration
-├── content.js             # Main logic (runs on YouTube pages)
+anti-brainrot-chrome/
+├── manifest.json          # Manifest V3 configuration
+├── content.js             # Main logic with browser polyfill
 ├── styles.css             # CSS rules for hiding elements
 ├── popup.html             # Settings UI
-├── popup.js               # Settings logic
+├── popup.js               # Settings logic with browser polyfill
 ├── icons/
 │   └── icon48.png         # Extension icon
 └── README.md              # This file
 ```
 
-### Key Concepts
-- **Content Scripts**: JavaScript that runs in the context of web pages
-- **Browser Actions**: Extension icon and popup in the toolbar
-- **Storage API**: Persisting user preferences
-- **MutationObserver**: Watching for DOM changes in SPAs
+### Key Technical Details
+- **Manifest V3**: Latest extension standard required by Chrome
+- **Browser Polyfill**: `if (typeof browser === "undefined") var browser = chrome;`
+- **Host Permissions**: Separated from regular permissions in V3
+- **Action API**: Replaces browser_action from V2
 
 ## Privacy
 
@@ -118,6 +135,22 @@ Anti Brainrot does NOT:
 
 All settings are stored locally in your browser.
 
+## Publishing to Stores
+
+### Chrome Web Store
+1. Create a developer account ($5 one-time fee)
+2. Zip the `anti-brainrot-chrome` folder
+3. Upload to Chrome Web Store Developer Dashboard
+4. Fill in store listing details
+5. Submit for review
+
+### Microsoft Edge Add-ons
+1. Create a Microsoft Partner Center account (free)
+2. Zip the extension folder
+3. Upload to Edge Add-ons dashboard
+4. Complete listing information
+5. Submit for review
+
 ## License
 
 Free to use, modify, and distribute.
@@ -128,5 +161,6 @@ Inspired by the original Unhook extension. Built for educational purposes and pe
 
 ---
 
-**Version:** 1.0.0
+**Version:** 1.0.0 (Manifest V3)
 **Last Updated:** February 2026
+**Compatible with:** Chrome, Edge, Brave, Opera, and other Chromium-based browsers

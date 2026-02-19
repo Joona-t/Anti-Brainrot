@@ -1,3 +1,8 @@
+// Cross-browser compatibility
+if (typeof browser === "undefined") {
+  var browser = chrome;
+}
+
 /**
  * Anti Brainrot - Popup Script
  * Handles settings UI and saves preferences
@@ -20,12 +25,14 @@ function updateMasterToggleState() {
   const masterToggle = document.getElementById('masterToggle');
   const isEnabled = masterToggle.checked;
 
-  // Enable/disable individual toggles
   SETTING_IDS.slice(1).forEach(id => {
     const checkbox = document.getElementById(id);
+    if (!checkbox) return;
+
     const container = checkbox.closest('.setting');
-    if (checkbox && container) {
-      checkbox.disabled = !isEnabled;
+    checkbox.disabled = !isEnabled;
+
+    if (container) {
       container.classList.toggle('disabled', !isEnabled);
     }
   });
@@ -38,31 +45,24 @@ function toggleDarkMode() {
   document.body.classList.toggle('dark-mode');
   const isDark = document.body.classList.contains('dark-mode');
 
-  // Update icon
   document.getElementById('themeIcon').textContent = isDark ? '☀️' : '🌙';
 
-  // Save preference
-  console.log('Saving dark mode:', isDark);
-  browser.storage.local.set({ darkMode: isDark }).then(() => {
-    console.log('Dark mode saved successfully');
-  }).catch(error => {
-    console.error('Error saving dark mode:', error);
-  });
+  browser.storage.local.set({ darkMode: isDark })
+    .catch(error => console.error('Error saving dark mode:', error));
 }
 
 /**
  * Load dark mode preference
  */
 function loadDarkMode() {
-  browser.storage.local.get({ darkMode: false }).then(result => {
-    console.log('Loaded dark mode:', result.darkMode);
-    if (result.darkMode) {
-      document.body.classList.add('dark-mode');
-      document.getElementById('themeIcon').textContent = '☀️';
-    }
-  }).catch(error => {
-    console.error('Error loading dark mode:', error);
-  });
+  browser.storage.local.get({ darkMode: false })
+    .then(result => {
+      if (result.darkMode) {
+        document.body.classList.add('dark-mode');
+        document.getElementById('themeIcon').textContent = '☀️';
+      }
+    })
+    .catch(error => console.error('Error loading dark mode:', error));
 }
 
 /**
@@ -78,24 +78,18 @@ function loadSettings() {
     hideShorts: true
   };
 
-  console.log('Loading settings with defaults:', defaults);
+  browser.storage.local.get(defaults)
+    .then(settings => {
+      SETTING_IDS.forEach(id => {
+        const checkbox = document.getElementById(id);
+        if (checkbox) {
+          checkbox.checked = settings[id];
+        }
+      });
 
-  browser.storage.local.get(defaults).then(settings => {
-    console.log('Loaded settings:', settings);
-
-    SETTING_IDS.forEach(id => {
-      const checkbox = document.getElementById(id);
-      if (checkbox) {
-        checkbox.checked = settings[id];
-        console.log(`Set ${id} to ${settings[id]}`);
-      }
-    });
-
-    // Update master toggle state after loading
-    updateMasterToggleState();
-  }).catch(error => {
-    console.error('Error loading settings:', error);
-  });
+      updateMasterToggleState();
+    })
+    .catch(error => console.error('Error loading settings:', error));
 }
 
 /**
@@ -111,19 +105,9 @@ function saveSettings() {
     }
   });
 
-  console.log('Saving settings:', settings);
-
-  browser.storage.local.set(settings).then(() => {
-    console.log('Settings saved successfully');
-
-    // Show success message
-    showStatus();
-
-    // Reload all YouTube tabs to apply changes immediately
-    reloadYouTubeTabs();
-  }).catch(error => {
-    console.error('Error saving settings:', error);
-  });
+  browser.storage.local.set(settings)
+    .then(showStatus)
+    .catch(error => console.error('Error saving settings:', error));
 }
 
 /**
@@ -131,6 +115,8 @@ function saveSettings() {
  */
 function showStatus() {
   const status = document.getElementById('status');
+  if (!status) return;
+
   status.classList.add('show');
 
   setTimeout(() => {
@@ -139,29 +125,12 @@ function showStatus() {
 }
 
 /**
- * Reload all open YouTube tabs
- */
-function reloadYouTubeTabs() {
-  browser.tabs.query({ url: "*://*.youtube.com/*" }).then(tabs => {
-    tabs.forEach(tab => {
-      browser.tabs.reload(tab.id);
-    });
-  }).catch(error => {
-    console.error('Error reloading tabs:', error);
-  });
-}
-
-/**
  * Initialize popup
  */
 function init() {
-  // Load dark mode preference
   loadDarkMode();
-
-  // Load current settings
   loadSettings();
 
-  // Add change listener to master toggle
   const masterToggle = document.getElementById('masterToggle');
   if (masterToggle) {
     masterToggle.addEventListener('change', () => {
@@ -170,7 +139,6 @@ function init() {
     });
   }
 
-  // Add change listeners to all other checkboxes
   SETTING_IDS.slice(1).forEach(id => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
@@ -178,12 +146,10 @@ function init() {
     }
   });
 
-  // Add theme toggle listener
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
     themeToggle.addEventListener('click', toggleDarkMode);
   }
 }
 
-// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', init);
