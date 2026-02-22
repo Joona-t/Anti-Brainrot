@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Anti Brainrot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Reclaim your focus by removing YouTube's algorithmic distractions",
 
   "icons": {
