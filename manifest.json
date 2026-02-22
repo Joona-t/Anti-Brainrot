@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Anti Brainrot",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Reclaim your focus by removing YouTube's algorithmic distractions",
 
   "icons": {
@@ -11,7 +11,10 @@
   },
 
   "permissions": [
-    "storage",
+    "storage"
+  ],
+
+  "host_permissions": [
     "*://*.youtube.com/*"
   ],
 
@@ -24,7 +27,7 @@
     }
   ],
 
-  "browser_action": {
+  "action": {
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"

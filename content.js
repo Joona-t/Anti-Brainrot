@@ -60,7 +60,7 @@ function loadSettings() {
   // Use Firefox's browser API (which is promisified)
   console.log('Anti Brainrot: Loading settings from storage');
 
-  browser.storage.local.get(DEFAULT_SETTINGS).then(result => {
+  chrome.storage.local.get(DEFAULT_SETTINGS).then(result => {
     console.log('Anti Brainrot: Loaded settings:', result);
     settings = result;
     applySettings();
@@ -98,7 +98,7 @@ function init() {
 }
 
 // Listen for settings changes from popup
-browser.storage.onChanged.addListener((changes, areaName) => {
+chrome.storage.onChanged.addListener((changes, areaName) => {
   console.log('Anti Brainrot: Storage changed:', areaName, changes);
   if (areaName === 'local') {
     // Reload settings and re-apply

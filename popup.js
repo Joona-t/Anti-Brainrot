@@ -43,7 +43,7 @@ function toggleDarkMode() {
 
   // Save preference
   console.log('Saving dark mode:', isDark);
-  browser.storage.local.set({ darkMode: isDark }).then(() => {
+  chrome.storage.local.set({ darkMode: isDark }).then(() => {
     console.log('Dark mode saved successfully');
   }).catch(error => {
     console.error('Error saving dark mode:', error);
@@ -54,7 +54,7 @@ function toggleDarkMode() {
  * Load dark mode preference
  */
 function loadDarkMode() {
-  browser.storage.local.get({ darkMode: false }).then(result => {
+  chrome.storage.local.get({ darkMode: false }).then(result => {
     console.log('Loaded dark mode:', result.darkMode);
     if (result.darkMode) {
       document.body.classList.add('dark-mode');
@@ -80,7 +80,7 @@ function loadSettings() {
 
   console.log('Loading settings with defaults:', defaults);
 
-  browser.storage.local.get(defaults).then(settings => {
+  chrome.storage.local.get(defaults).then(settings => {
     console.log('Loaded settings:', settings);
 
     SETTING_IDS.forEach(id => {
@@ -113,7 +113,7 @@ function saveSettings() {
 
   console.log('Saving settings:', settings);
 
-  browser.storage.local.set(settings).then(() => {
+  chrome.storage.local.set(settings).then(() => {
     console.log('Settings saved successfully');
 
     // Show success message
@@ -142,9 +142,9 @@ function showStatus() {
  * Reload all open YouTube tabs
  */
 function reloadYouTubeTabs() {
-  browser.tabs.query({ url: "*://*.youtube.com/*" }).then(tabs => {
+  chrome.tabs.query({ url: "*://*.youtube.com/*" }).then(tabs => {
     tabs.forEach(tab => {
-      browser.tabs.reload(tab.id);
+      chrome.tabs.reload(tab.id);
     });
   }).catch(error => {
     console.error('Error reloading tabs:', error);
