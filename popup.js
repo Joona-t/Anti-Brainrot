@@ -1,5 +1,5 @@
 /**
- * Anti Brainrot v2.0.0 — Popup Script
+ * Anti Brainrot v1.0.3 — Popup Script
  * Settings UI with grouped collapsible sections
  */
 

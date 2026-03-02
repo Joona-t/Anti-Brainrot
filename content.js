@@ -1,5 +1,5 @@
 /**
- * Anti Brainrot v2.1.0 — Content Script
+ * Anti Brainrot v1.0.3 — Content Script
  * Hides YouTube distractions via CSS body classes + autoplay disable
  * Architecture: hide-by-default, show-on-demand
  *
