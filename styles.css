@@ -1,46 +1,46 @@
-/* Anti Brainrot v2.0.0 — YouTube element hiding rules */
+/* Anti Brainrot v2.1.0 — YouTube element hiding rules (hide-by-default) */
 
 /* ===== Feed & Recommendations ===== */
 
 /* Hide Homepage Feed */
-body.ab-hide-homepage ytd-browse[page-subtype="home"] #contents,
-body.ab-hide-homepage ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
-body.ab-hide-homepage ytd-browse[page-subtype="home"] ytd-two-column-browse-results-renderer #primary {
+body:not(.ab-show-homepage) ytd-browse[page-subtype="home"] #contents,
+body:not(.ab-show-homepage) ytd-browse[page-subtype="home"] ytd-rich-grid-renderer,
+body:not(.ab-show-homepage) ytd-browse[page-subtype="home"] ytd-two-column-browse-results-renderer #primary {
   display: none !important;
 }
 
 /* Hide Sidebar Recommendations */
-body.ab-hide-sidebar #related,
-body.ab-hide-sidebar #secondary,
-body.ab-hide-sidebar #secondary-inner,
-body.ab-hide-sidebar ytd-watch-next-secondary-results-renderer {
+body:not(.ab-show-sidebar) #related,
+body:not(.ab-show-sidebar) #secondary,
+body:not(.ab-show-sidebar) #secondary-inner,
+body:not(.ab-show-sidebar) ytd-watch-next-secondary-results-renderer {
   display: none !important;
 }
 
 /* Hide End Screen */
-body.ab-hide-endscreen .ytp-endscreen-content,
-body.ab-hide-endscreen .ytp-ce-covering-overlay,
-body.ab-hide-endscreen .ytp-ce-element-show,
-body.ab-hide-endscreen .ytp-ce-element {
+body:not(.ab-show-endscreen) .ytp-endscreen-content,
+body:not(.ab-show-endscreen) .ytp-ce-covering-overlay,
+body:not(.ab-show-endscreen) .ytp-ce-element-show,
+body:not(.ab-show-endscreen) .ytp-ce-element {
   display: none !important;
 }
 
 /* Hide Shorts */
-body.ab-hide-shorts ytd-reel-shelf-renderer,
-body.ab-hide-shorts ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
-body.ab-hide-shorts [is-shorts],
-body.ab-hide-shorts ytd-guide-entry-renderer:has([title="Shorts"]),
-body.ab-hide-shorts ytd-mini-guide-entry-renderer:has([aria-label="Shorts"]),
-body.ab-hide-shorts a[href="/shorts"],
-body.ab-hide-shorts ytd-rich-shelf-renderer[is-shorts],
-body.ab-hide-shorts yt-tab-shape:has([tab-title="Shorts"]) {
+body:not(.ab-show-shorts) ytd-reel-shelf-renderer,
+body:not(.ab-show-shorts) ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
+body:not(.ab-show-shorts) [is-shorts],
+body:not(.ab-show-shorts) ytd-guide-entry-renderer:has([title="Shorts"]),
+body:not(.ab-show-shorts) ytd-mini-guide-entry-renderer:has([aria-label="Shorts"]),
+body:not(.ab-show-shorts) a[href="/shorts"],
+body:not(.ab-show-shorts) ytd-rich-shelf-renderer[is-shorts],
+body:not(.ab-show-shorts) yt-tab-shape:has([tab-title="Shorts"]) {
   display: none !important;
 }
 
 /* Hide Mix / Radio Playlists */
-body.ab-hide-mix ytd-radio-renderer,
-body.ab-hide-mix ytd-compact-radio-renderer,
-body.ab-hide-mix ytd-rich-item-renderer:has(ytd-radio-renderer) {
+body:not(.ab-show-mix) ytd-radio-renderer,
+body:not(.ab-show-mix) ytd-compact-radio-renderer,
+body:not(.ab-show-mix) ytd-rich-item-renderer:has(ytd-radio-renderer) {
   display: none !important;
 }
 
@@ -48,30 +48,30 @@ body.ab-hide-mix ytd-rich-item-renderer:has(ytd-radio-renderer) {
 /* ===== Video Page ===== */
 
 /* Hide Comments */
-body.ab-hide-comments ytd-comments#comments,
-body.ab-hide-comments #comments {
+body:not(.ab-show-comments) ytd-comments#comments,
+body:not(.ab-show-comments) #comments {
   display: none !important;
 }
 
 /* Hide Description */
-body.ab-hide-description #description.ytd-watch-metadata,
-body.ab-hide-description ytd-text-inline-expander,
-body.ab-hide-description ytd-structured-description-content-renderer,
-body.ab-hide-description #description-inline-expander {
+body:not(.ab-show-description) #description.ytd-watch-metadata,
+body:not(.ab-show-description) ytd-text-inline-expander,
+body:not(.ab-show-description) ytd-structured-description-content-renderer,
+body:not(.ab-show-description) #description-inline-expander {
   display: none !important;
 }
 
 /* Hide Live Chat */
-body.ab-hide-livechat ytd-live-chat-frame,
-body.ab-hide-livechat #chat-container,
-body.ab-hide-livechat #chat {
+body:not(.ab-show-livechat) ytd-live-chat-frame,
+body:not(.ab-show-livechat) #chat-container,
+body:not(.ab-show-livechat) #chat {
   display: none !important;
 }
 
 /* Hide Merch / Tickets / Offers */
-body.ab-hide-merch ytd-merch-shelf-renderer,
-body.ab-hide-merch ytd-ticket-shelf-renderer,
-body.ab-hide-merch ytd-offer-module-renderer {
+body:not(.ab-show-merch) ytd-merch-shelf-renderer,
+body:not(.ab-show-merch) ytd-ticket-shelf-renderer,
+body:not(.ab-show-merch) ytd-offer-module-renderer {
   display: none !important;
 }
 
@@ -79,33 +79,33 @@ body.ab-hide-merch ytd-offer-module-renderer {
 /* ===== UI & Controls ===== */
 
 /* Hide Video Buttons (like, share, save, clip) */
-body.ab-hide-videobuttons #top-level-buttons-computed,
-body.ab-hide-videobuttons ytd-menu-renderer.ytd-watch-metadata,
-body.ab-hide-videobuttons ytd-segmented-like-dislike-button-renderer {
+body:not(.ab-show-videobuttons) #top-level-buttons-computed,
+body:not(.ab-show-videobuttons) ytd-menu-renderer.ytd-watch-metadata,
+body:not(.ab-show-videobuttons) ytd-segmented-like-dislike-button-renderer {
   display: none !important;
 }
 
 /* Hide Channel Info (channel name, avatar, subscribe) */
-body.ab-hide-channelinfo ytd-video-owner-renderer,
-body.ab-hide-channelinfo #owner {
+body:not(.ab-show-channelinfo) ytd-video-owner-renderer,
+body:not(.ab-show-channelinfo) #owner {
   display: none !important;
 }
 
 /* Hide Notification Bell */
-body.ab-hide-notifications ytd-notification-topbar-button-renderer {
+body:not(.ab-show-notifications) ytd-notification-topbar-button-renderer {
   display: none !important;
 }
 
 /* Hide Annotations / Info Cards (in-video) */
-body.ab-hide-annotations .ytp-cards-teaser,
-body.ab-hide-annotations .ytp-cards-button,
-body.ab-hide-annotations .ytp-cards-button-icon-default {
+body:not(.ab-show-annotations) .ytp-cards-teaser,
+body:not(.ab-show-annotations) .ytp-cards-button,
+body:not(.ab-show-annotations) .ytp-cards-button-icon-default {
   display: none !important;
 }
 
 /* Hide Playlist Panel */
-body.ab-hide-playlist ytd-playlist-panel-renderer,
-body.ab-hide-playlist #playlist {
+body:not(.ab-show-playlist) ytd-playlist-panel-renderer,
+body:not(.ab-show-playlist) #playlist {
   display: none !important;
 }
 
@@ -113,7 +113,7 @@ body.ab-hide-playlist #playlist {
 /* ===== Behavior ===== */
 
 /* Hide Autoplay Toggle (JS disables autoplay separately) */
-body.ab-disable-autoplay .ytp-autonav-toggle-button-container,
-body.ab-disable-autoplay .ytp-autonav-toggle-button {
+body:not(.ab-show-autoplay) .ytp-autonav-toggle-button-container,
+body:not(.ab-show-autoplay) .ytp-autonav-toggle-button {
   display: none !important;
 }

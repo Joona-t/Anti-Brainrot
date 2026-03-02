@@ -1,6 +1,7 @@
 /**
- * Anti Brainrot v2.0.0 — Content Script
+ * Anti Brainrot v2.1.0 — Content Script
  * Hides YouTube distractions via CSS body classes + autoplay disable
+ * Architecture: hide-by-default, show-on-demand
  */
 
 const DEFAULT_SETTINGS = {
@@ -23,21 +24,21 @@ const DEFAULT_SETTINGS = {
 };
 
 const FEATURE_CLASSES = {
-  hideHomepage:     'ab-hide-homepage',
-  hideSidebar:      'ab-hide-sidebar',
-  hideEndscreen:    'ab-hide-endscreen',
-  hideShorts:       'ab-hide-shorts',
-  hideMix:          'ab-hide-mix',
-  hideComments:     'ab-hide-comments',
-  hideDescription:  'ab-hide-description',
-  hideLiveChat:     'ab-hide-livechat',
-  hideMerch:        'ab-hide-merch',
-  hideVideoButtons: 'ab-hide-videobuttons',
-  hideChannelInfo:  'ab-hide-channelinfo',
-  hideNotifications:'ab-hide-notifications',
-  hideAnnotations:  'ab-hide-annotations',
-  hidePlaylist:     'ab-hide-playlist',
-  disableAutoplay:  'ab-disable-autoplay'
+  hideHomepage:     'ab-show-homepage',
+  hideSidebar:      'ab-show-sidebar',
+  hideEndscreen:    'ab-show-endscreen',
+  hideShorts:       'ab-show-shorts',
+  hideMix:          'ab-show-mix',
+  hideComments:     'ab-show-comments',
+  hideDescription:  'ab-show-description',
+  hideLiveChat:     'ab-show-livechat',
+  hideMerch:        'ab-show-merch',
+  hideVideoButtons: 'ab-show-videobuttons',
+  hideChannelInfo:  'ab-show-channelinfo',
+  hideNotifications:'ab-show-notifications',
+  hideAnnotations:  'ab-show-annotations',
+  hidePlaylist:     'ab-show-playlist',
+  disableAutoplay:  'ab-show-autoplay'
 };
 
 let settings = { ...DEFAULT_SETTINGS };
@@ -48,13 +49,13 @@ function applySettings() {
 
   if (!settings.masterToggle) {
     for (const cls of Object.values(FEATURE_CLASSES)) {
-      body.classList.remove(cls);
+      body.classList.add(cls);
     }
     return;
   }
 
   for (const [key, cls] of Object.entries(FEATURE_CLASSES)) {
-    body.classList.toggle(cls, !!settings[key]);
+    body.classList.toggle(cls, !settings[key]);
   }
 }
 
