@@ -2,6 +2,10 @@
  * Anti Brainrot v2.1.0 — Content Script
  * Hides YouTube distractions via CSS body classes + autoplay disable
  * Architecture: hide-by-default, show-on-demand
+ *
+ * CSS hides everything at document_start via :not(.ab-show-*) selectors.
+ * This script adds ab-show-* classes for features the user wants visible.
+ * Storage read starts immediately at document_start — not waiting for body.
  */
 
 const DEFAULT_SETTINGS = {
@@ -42,6 +46,9 @@ const FEATURE_CLASSES = {
 };
 
 let settings = { ...DEFAULT_SETTINGS };
+let didInit = false;
+
+/* ── Core: apply body classes based on settings ─────────────────────────── */
 
 function applySettings() {
   const body = document.body;
@@ -79,6 +86,8 @@ function disableAutoplay() {
   tryDisable();
 }
 
+/* ── Settings loading ───────────────────────────────────────────────────── */
+
 function loadSettings() {
   browser.storage.local.get(DEFAULT_SETTINGS).then(result => {
     settings = result;
@@ -94,11 +103,20 @@ function onNavigate() {
   disableAutoplay();
 }
 
+/* ── Initialization ─────────────────────────────────────────────────────── */
+
 function init() {
-  loadSettings();
+  if (didInit) return;
+  didInit = true;
+
+  applySettings();
+
+  // YouTube SPA navigation
   document.addEventListener('yt-navigate-finish', onNavigate);
+  document.addEventListener('yt-page-data-updated', onNavigate);
   window.addEventListener('popstate', onNavigate);
 
+  // Settings changes from popup
   browser.storage.onChanged.addListener((changes, areaName) => {
     if (areaName === 'local') {
       loadSettings();
@@ -106,8 +124,29 @@ function init() {
   });
 }
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
-} else {
+/* ── Bootstrap: start ASAP, don't wait ──────────────────────────────────── */
+
+// 1. Start storage read IMMEDIATELY at document_start (before body exists)
+//    This runs in parallel with HTML parsing — shaves ~100ms off the delay.
+loadSettings();
+
+// 2. Detect body creation as early as possible, then init
+if (document.body) {
   init();
+} else {
+  // MutationObserver fires the instant <body> is created by the parser —
+  // significantly earlier than DOMContentLoaded.
+  const observer = new MutationObserver(() => {
+    if (document.body) {
+      observer.disconnect();
+      init();
+    }
+  });
+  observer.observe(document.documentElement, { childList: true });
+
+  // Fallback: DOMContentLoaded (in case MutationObserver misses it)
+  document.addEventListener('DOMContentLoaded', () => {
+    observer.disconnect();
+    init();
+  });
 }
