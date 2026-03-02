@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Anti Brainrot",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "Reclaim your focus by removing YouTube's algorithmic distractions",
 
   "icons": {
@@ -10,18 +10,12 @@
     "128": "icons/icon128.png"
   },
 
-  "permissions": [
-    "storage"
-  ],
-
-  "host_permissions": [
-    "*://*.youtube.com/*"
-  ],
+  "permissions": ["storage"],
 
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/*"],
-      "js": ["content.js"],
+      "js": ["lib/browser-polyfill.min.js", "content.js"],
       "css": ["styles.css"],
       "run_at": "document_start"
     }
@@ -32,7 +26,24 @@
       "16": "icons/icon16.png",
       "48": "icons/icon48.png"
     },
-    "default_title": "Anti Brainrot Settings",
+    "default_title": "Anti Brainrot",
     "default_popup": "popup.html"
+  },
+
+  "web_accessible_resources": [
+    {
+      "resources": ["mascot.png"],
+      "matches": ["*://*.youtube.com/*"]
+    }
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "anti-brainrot@lovespark.suite",
+      "data_collection_permissions": {
+        "is_exempt": true,
+        "justification": "This extension does not collect, transmit, or store any user data."
+      }
+    }
   }
 }

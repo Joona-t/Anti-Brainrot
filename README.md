@@ -2,127 +2,104 @@
 
 **Reclaim your focus by removing YouTube's algorithmic distractions**
 
-A Firefox extension that removes distracting elements from YouTube to help you stay focused on the content you choose to watch.
+Part of the [LoveSpark Suite](https://joona-t.github.io) — free, open-source, privacy-first tools for a calmer internet.
 
 ## Features
 
-✅ **Hide Homepage Feed** - Remove all video recommendations on the YouTube homepage
-✅ **Hide Sidebar Recommendations** - Remove the entire right sidebar of related videos
-✅ **Hide Comments Section** - Remove all comments below videos
-✅ **Hide End Screen Suggestions** - Remove video suggestions that appear at the end
-✅ **Hide Shorts** - Remove shorts shelf, shorts button, and shorts tabs
-✅ **Customizable Settings** - Toggle each feature on/off individually via popup
+### Feed & Recommendations
+- Hide Homepage Feed
+- Hide Sidebar Recommendations
+- Hide End Screen Suggestions
+- Hide Shorts
+- Hide Mix / Radio Playlists
 
-## Installation (Firefox)
+### Video Page
+- Hide Comments
+- Hide Description
+- Hide Live Chat
+- Hide Merch / Tickets / Offers
 
-### Method 1: Temporary Installation (for testing)
+### UI & Controls
+- Hide Video Buttons (like, share, save)
+- Hide Channel Info (name, avatar, subscribe)
+- Hide Notification Bell
+- Hide Annotations / Info Cards
+- Hide Playlist Panel
 
-1. Open Firefox
-2. Navigate to `about:debugging#/runtime/this-firefox`
-3. Click **"Load Temporary Add-on..."**
-4. Navigate to the `youtube-unhook` folder and select the `manifest.json` file
-5. Visit YouTube - all distractions should now be hidden!
+### Behavior
+- Disable Autoplay
 
-**Note:** Temporary extensions are removed when Firefox restarts.
+All settings are toggleable individually via the extension popup.
 
-### Method 2: Permanent Installation (unsigned)
+## Installation
 
-1. Open Firefox
-2. Type `about:config` in the address bar and press Enter
-3. Accept the warning
-4. Search for `xpinstall.signatures.required`
-5. Set it to `false` (double-click to toggle)
-6. Type `about:addons` in the address bar
-7. Click the gear icon ⚙️ → "Install Add-on From File..."
-8. Select the `manifest.json` file from the `youtube-unhook` folder
+### Chrome Web Store
+[Install from Chrome Web Store](https://chromewebstore.google.com/detail/anti-brainrot)
 
-## Usage
+### Firefox Add-ons
+[Install from Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/anti-brainrot/)
 
-### Accessing Settings
+### Edge Add-ons
+[Install from Edge Add-ons](https://microsoftedge.microsoft.com/addons/detail/anti-brainrot)
 
-Click the extension icon in your Firefox toolbar to open the settings popup.
+### Manual Installation (for testing)
 
-### Customizing Features
+**Chrome/Edge:**
+1. Open `chrome://extensions`
+2. Enable Developer mode
+3. Click "Load unpacked"
+4. Select the `Anti-Brainrot` folder
 
-Toggle any feature on or off:
-- ☑️ Checked = Feature enabled (element hidden)
-- ☐ Unchecked = Feature disabled (element visible)
-
-Changes are saved automatically and applied immediately to all open YouTube tabs.
+**Firefox:**
+1. Open `about:debugging#/runtime/this-firefox`
+2. Click "Load Temporary Add-on..."
+3. Select the `manifest.json` file
 
 ## How It Works
 
-Anti Brainrot uses a content script with CSS classes to hide distracting elements:
+Anti Brainrot uses CSS class toggles on `document.body` to show/hide YouTube elements. Settings propagate instantly via `chrome.storage.onChanged` — no page reload needed. YouTube SPA navigation is handled via the native `yt-navigate-finish` event.
 
-- **Content Script** (`content.js`) - Monitors YouTube pages and applies hiding rules
-- **MutationObserver** - Detects navigation in YouTube's single-page app
-- **CSS Classes** (`styles.css`) - Hides elements using `display: none !important`
-- **Storage API** - Saves your preferences across browser sessions
+## Permissions
 
-## Permissions Explained
+- **storage** — Save your toggle preferences locally
+- **youtube.com access** — Inject CSS rules to hide elements (via static content scripts)
 
-- **`storage`** - Save your toggle preferences
-- **`tabs`** - Reload YouTube tabs when settings change
-- **`*://*.youtube.com/*`** - Access YouTube pages to hide elements
-
-## Browser Compatibility
-
-- ✅ **Firefox** (Recommended - built for Firefox)
-- ⚠️ **Chrome/Edge** - May work but not officially supported (uses Manifest V2)
-
-## Troubleshooting
-
-**Elements not hiding?**
-- Make sure the feature is enabled in the extension popup
-- Try refreshing the YouTube page
-- Check if YouTube has updated their HTML structure
-
-**Extension not loading?**
-- Ensure you selected the correct `manifest.json` file
-- Check Firefox's Browser Console (Ctrl+Shift+J) for errors
-
-**Settings not saving?**
-- Check that the extension has storage permissions
-- Try re-loading the extension
-
-## Development
-
-This extension is designed to be beginner-friendly for learning JavaScript and browser extensions.
-
-### File Structure
-```
-youtube-unhook/
-├── manifest.json          # Extension configuration
-├── content.js             # Main logic (runs on YouTube pages)
-├── styles.css             # CSS rules for hiding elements
-├── popup.html             # Settings UI
-├── popup.js               # Settings logic
-├── icons/
-│   └── icon48.png         # Extension icon
-└── README.md              # This file
-```
-
-### Key Concepts
-- **Content Scripts**: JavaScript that runs in the context of web pages
-- **Browser Actions**: Extension icon and popup in the toolbar
-- **Storage API**: Persisting user preferences
-- **MutationObserver**: Watching for DOM changes in SPAs
+That's it. No `tabs`, no `host_permissions`, no remote connections.
 
 ## Privacy
 
-Anti Brainrot does NOT:
-- ❌ Collect any data
-- ❌ Track your browsing
-- ❌ Send information anywhere
-- ❌ Require an account
+- No data collection
+- No tracking
+- No external connections
+- All settings stored locally
+- [Privacy Policy](PRIVACY.md)
 
-All settings are stored locally in your browser.
+## File Structure
+
+```
+Anti-Brainrot/
+  manifest.json
+  content.js
+  styles.css
+  popup.html
+  popup.css
+  popup.js
+  mascot.png
+  PRIVACY.md
+  README.md
+  lib/
+    browser-polyfill.min.js
+  icons/
+    icon16.png
+    icon48.png
+    icon128.png
+```
 
 ## License
 
 MIT License
 
-Copyright (c) 2025 Joona Tyrninoksa 
+Copyright (c) 2025-2026 Joona Tyrninoksa
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -142,12 +119,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-
 ## Credits
 
-Inspired by the original Unhook extension. Built for educational purposes and personal productivity.
+Inspired by the Unhook extension. Built with love as part of the LoveSpark Suite.
 
 ---
 
-**Version:** 1.0.0
+**Version:** 2.0.0
 **Last Updated:** February 2026

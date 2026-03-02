@@ -1,6 +1,6 @@
 # Privacy Policy for Anti Brainrot
 
-**Last Updated:** February 17, 2026
+**Last Updated:** February 26, 2026
 
 ## Overview
 
@@ -19,7 +19,6 @@ Anti Brainrot is committed to protecting your privacy. This extension does not c
 
 Anti Brainrot stores your preferences locally on your device using your browser's storage APIs. This includes:
 - Feature toggle settings (which elements to hide)
-- Dark mode preference
 - Master toggle state
 
 **This data:**
@@ -32,10 +31,9 @@ Anti Brainrot stores your preferences locally on your device using your browser'
 Anti Brainrot requires the following permissions:
 
 - **Storage:** To save your preferences locally on your device
-- **Tabs:** To reload YouTube tabs when you change settings
-- **YouTube.com access:** To modify YouTube's appearance and hide distracting elements
+- **YouTube.com access:** To inject CSS rules that hide distracting elements (via static content scripts)
 
-These permissions are used solely for the extension's core functionality.
+No other permissions are requested.
 
 ## Third-Party Services
 
@@ -47,7 +45,7 @@ If we make any changes to this privacy policy, we will update the "Last Updated"
 
 ## Contact
 
-If you have any questions about this privacy policy, please open an issue on our [GitHub repository](https://github.com/Joona-t/Anti-Brainrot).
+If you have any questions about this privacy policy, please open an issue on our [GitHub repository](https://github.com/Joona-t/anti-brainrot).
 
 ---
 

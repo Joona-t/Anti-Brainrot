@@ -1,112 +1,110 @@
 /**
- * Anti Brainrot - Content Script
- * Manages hiding/showing YouTube elements based on user preferences
+ * Anti Brainrot v2.0.0 — Content Script
+ * Hides YouTube distractions via CSS body classes + autoplay disable
  */
 
-// Default settings - all features enabled
 const DEFAULT_SETTINGS = {
   masterToggle: true,
   hideHomepage: true,
   hideSidebar: true,
-  hideComments: true,
   hideEndscreen: true,
-  hideShorts: true
+  hideShorts: true,
+  hideMix: true,
+  hideComments: true,
+  hideDescription: false,
+  hideLiveChat: true,
+  hideMerch: true,
+  hideVideoButtons: false,
+  hideChannelInfo: false,
+  hideNotifications: false,
+  hideAnnotations: true,
+  hidePlaylist: false,
+  disableAutoplay: true
 };
 
-// Current settings (loaded from storage)
+const FEATURE_CLASSES = {
+  hideHomepage:     'ab-hide-homepage',
+  hideSidebar:      'ab-hide-sidebar',
+  hideEndscreen:    'ab-hide-endscreen',
+  hideShorts:       'ab-hide-shorts',
+  hideMix:          'ab-hide-mix',
+  hideComments:     'ab-hide-comments',
+  hideDescription:  'ab-hide-description',
+  hideLiveChat:     'ab-hide-livechat',
+  hideMerch:        'ab-hide-merch',
+  hideVideoButtons: 'ab-hide-videobuttons',
+  hideChannelInfo:  'ab-hide-channelinfo',
+  hideNotifications:'ab-hide-notifications',
+  hideAnnotations:  'ab-hide-annotations',
+  hidePlaylist:     'ab-hide-playlist',
+  disableAutoplay:  'ab-disable-autoplay'
+};
+
 let settings = { ...DEFAULT_SETTINGS };
 
-/**
- * Apply CSS classes to body based on enabled features
- */
 function applySettings() {
   const body = document.body;
+  if (!body) return;
 
-  if (!body) {
-    // Body not ready yet, try again soon
-    setTimeout(applySettings, 100);
+  if (!settings.masterToggle) {
+    for (const cls of Object.values(FEATURE_CLASSES)) {
+      body.classList.remove(cls);
+    }
     return;
   }
 
-  console.log('Anti Brainrot: Applying settings:', settings);
-
-  // If master toggle is off, remove all classes (disable all features)
-  if (settings.masterToggle === false) {
-    console.log('Anti Brainrot: Master toggle is OFF - removing all classes');
-    body.classList.remove(
-      'unhook-hide-homepage',
-      'unhook-hide-sidebar',
-      'unhook-hide-comments',
-      'unhook-hide-endscreen',
-      'unhook-hide-shorts'
-    );
-    return;
+  for (const [key, cls] of Object.entries(FEATURE_CLASSES)) {
+    body.classList.toggle(cls, !!settings[key]);
   }
-
-  // Apply or remove classes based on settings
-  body.classList.toggle('unhook-hide-homepage', settings.hideHomepage);
-  body.classList.toggle('unhook-hide-sidebar', settings.hideSidebar);
-  body.classList.toggle('unhook-hide-comments', settings.hideComments);
-  body.classList.toggle('unhook-hide-endscreen', settings.hideEndscreen);
-  body.classList.toggle('unhook-hide-shorts', settings.hideShorts);
-
-  console.log('Anti Brainrot: Classes applied');
 }
 
-/**
- * Load settings from browser storage
- */
-function loadSettings() {
-  // Use Firefox's browser API (which is promisified)
-  console.log('Anti Brainrot: Loading settings from storage');
+function disableAutoplay() {
+  if (!settings.disableAutoplay || !settings.masterToggle) return;
 
-  chrome.storage.local.get(DEFAULT_SETTINGS).then(result => {
-    console.log('Anti Brainrot: Loaded settings:', result);
+  let attempts = 0;
+  const maxAttempts = 17;
+
+  function tryDisable() {
+    const toggle = document.querySelector('.ytp-autonav-toggle-button');
+    if (toggle && toggle.getAttribute('aria-checked') === 'true') {
+      toggle.click();
+      return;
+    }
+    if (++attempts < maxAttempts) {
+      setTimeout(tryDisable, 300);
+    }
+  }
+
+  tryDisable();
+}
+
+function loadSettings() {
+  browser.storage.local.get(DEFAULT_SETTINGS).then(result => {
     settings = result;
     applySettings();
-  }).catch(error => {
-    console.error('Anti Brainrot: Error loading settings', error);
-    applySettings(); // Apply defaults on error
+    disableAutoplay();
+  }).catch(() => {
+    applySettings();
   });
 }
 
-/**
- * Initialize the extension
- */
+function onNavigate() {
+  applySettings();
+  disableAutoplay();
+}
+
 function init() {
   loadSettings();
+  document.addEventListener('yt-navigate-finish', onNavigate);
+  window.addEventListener('popstate', onNavigate);
 
-  // Re-apply settings when navigating (YouTube is a SPA)
-  // Watch for URL changes
-  let lastUrl = location.href;
-
-  // Use MutationObserver to detect navigation
-  const observer = new MutationObserver(() => {
-    const currentUrl = location.href;
-    if (currentUrl !== lastUrl) {
-      lastUrl = currentUrl;
-      // Re-apply settings after navigation
-      setTimeout(applySettings, 100);
+  browser.storage.onChanged.addListener((changes, areaName) => {
+    if (areaName === 'local') {
+      loadSettings();
     }
-  });
-
-  // Observe the entire document for changes
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true
   });
 }
 
-// Listen for settings changes from popup
-chrome.storage.onChanged.addListener((changes, areaName) => {
-  console.log('Anti Brainrot: Storage changed:', areaName, changes);
-  if (areaName === 'local') {
-    // Reload settings and re-apply
-    loadSettings();
-  }
-});
-
-// Initialize when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', init);
 } else {
