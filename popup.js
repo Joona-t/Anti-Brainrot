@@ -3,19 +3,25 @@
  * Settings UI with grouped collapsible sections
  */
 
-// Dark mode
-browser.storage.local.get(['darkMode']).then(({ darkMode }) => {
-  document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
-  const btn = document.getElementById('btnDarkMode');
-  if (btn) btn.textContent = darkMode ? '☀️' : '🌙';
-});
-function toggleTheme() {
-  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
-  browser.storage.local.set({ darkMode: !isDark });
-  const btn = document.getElementById('btnDarkMode');
-  if (btn) btn.textContent = isDark ? '🌙' : '☀️';
+// Theme system
+const THEMES = ['dark', 'retro', 'beige', 'slate'];
+function applyTheme(t) {
+  THEMES.forEach(n => document.body.classList.remove('theme-' + n));
+  document.body.classList.add('theme-' + t);
+  const btn = document.getElementById('themeTab');
+  if (btn) btn.textContent = t;
 }
+function cycleTheme() {
+  const cur = THEMES.find(t => document.body.classList.contains('theme-' + t)) || 'retro';
+  const next = THEMES[(THEMES.indexOf(cur) + 1) % THEMES.length];
+  applyTheme(next);
+  browser.storage.local.set({ theme: next });
+}
+browser.storage.local.get(['theme', 'darkMode']).then(({ theme, darkMode }) => {
+  if (!theme && darkMode) theme = 'dark';
+  applyTheme(theme || 'retro');
+});
+document.getElementById('themeTab').addEventListener('click', cycleTheme);
 
 const FEATURE_IDS = [
   'hideHomepage', 'hideSidebar', 'hideEndscreen', 'hideShorts', 'hideMix',
@@ -102,8 +108,6 @@ function showStatus() {
 
 function init() {
   loadSettings();
-
-  document.getElementById('btnDarkMode').addEventListener('click', toggleTheme);
 
   // Master toggle
   document.getElementById('masterToggle').addEventListener('change', () => {

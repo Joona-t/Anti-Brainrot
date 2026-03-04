@@ -41,6 +41,7 @@
     "gecko": {
       "id": "anti-brainrot@lovespark.suite",
       "data_collection_permissions": {
+        "required": false,
         "is_exempt": true,
         "justification": "This extension does not collect, transmit, or store any user data."
       }
