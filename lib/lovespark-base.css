@@ -1,3 +1,7 @@
+/* lovespark-base.css — Shared variables, themes, and base styles
+   Canonical source: Extensions/infrastructure/lovespark-shared-lib/
+   Copy to each extension's lib/ folder via scripts/sync-shared-lib.sh */
+
 :root {
   /* Background gradient */
   --ls-bg-pink-light: #FDCFE1;
@@ -15,6 +19,9 @@
   --ls-pink-accent: #E8457C;
   --ls-pink-deep: #D63466;
   --ls-white: #FFFFFF;
+  --ls-purple: #7C3AED;
+  --ls-teal: #0D9488;
+  --ls-blue: #818CF8;
 
   /* Text */
   --ls-text-dark: #5C1A36;
@@ -24,222 +31,13 @@
   /* Effects */
   --ls-glow: 0 0 16px rgba(232, 69, 124, 0.3);
   --ls-glow-strong: 0 0 24px rgba(232, 69, 124, 0.45);
+  --ls-glow-white: 0 0 16px rgba(255, 255, 255, 0.5);
 
   /* Layout */
   --ls-radius: 14px;
   --ls-radius-sm: 10px;
   --ls-font-body: 'DM Mono', monospace;
   --ls-font-display: 'Press Start 2P', cursive;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  width: 340px;
-  font-family: var(--ls-font-body);
-  background: var(--ls-bg-gradient);
-  color: var(--ls-text-dark);
-}
-
-.popup-container {
-  padding: 16px;
-}
-
-/* ===== Header ===== */
-
-.popup-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  position: relative;
-}
-
-.mascot {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-}
-
-.header-title {
-  font-family: var(--ls-font-display);
-  font-size: 11px;
-  color: var(--ls-text-white);
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-}
-
-/* ===== Master Toggle ===== */
-
-.master-section {
-  background: var(--ls-glass-strong);
-  border: 1px solid var(--ls-glass-border);
-  border-radius: var(--ls-radius);
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  backdrop-filter: blur(8px);
-}
-
-.master-text {
-  font-weight: 500;
-  color: var(--ls-pink-accent);
-}
-
-/* ===== Feature Groups ===== */
-
-.group {
-  background: var(--ls-glass);
-  border: 1px solid var(--ls-glass-border);
-  border-radius: var(--ls-radius);
-  margin-bottom: 8px;
-  backdrop-filter: blur(8px);
-  overflow: hidden;
-}
-
-.group-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-  padding: 10px 14px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: var(--ls-font-body);
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--ls-text-dark);
-}
-
-.group-header:hover {
-  background: var(--ls-glass-light);
-}
-
-.group-icon {
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.group-name {
-  flex: 1;
-  text-align: left;
-}
-
-.group-chevron {
-  font-size: 12px;
-  color: var(--ls-text-muted);
-  transition: transform 0.2s;
-  flex-shrink: 0;
-}
-
-.group-body {
-  padding: 0 14px 10px;
-}
-
-.group-body.collapsed {
-  display: none;
-}
-
-/* ===== Toggle Rows ===== */
-
-.setting {
-  padding: 6px 0;
-  transition: opacity 0.2s;
-}
-
-.setting.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-}
-
-.toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  user-select: none;
-}
-
-.toggle-text {
-  font-size: 13px;
-  color: var(--ls-text-dark);
-}
-
-/* ===== Toggle Switch ===== */
-
-.toggle-switch {
-  position: relative;
-  width: 44px;
-  height: 24px;
-  flex-shrink: 0;
-}
-
-.toggle-switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  position: absolute;
-}
-
-.slider {
-  position: absolute;
-  inset: 0;
-  background: var(--ls-glass-light);
-  border: 1px solid var(--ls-glass-border);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-
-.slider::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.2s;
-  box-shadow: 0 2px 4px rgba(92, 26, 54, 0.2);
-}
-
-input:checked + .slider {
-  background: var(--ls-pink-accent);
-  border-color: var(--ls-pink-accent);
-  box-shadow: var(--ls-glow);
-}
-
-input:checked + .slider::after {
-  transform: translateX(20px);
-}
-
-input:disabled + .slider {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
-
-/* ===== Status Toast ===== */
-
-.status {
-  padding: 8px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--ls-pink-accent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.status.show {
-  opacity: 1;
-}
-
-/* ===== Footer ===== */
-
-.popup-footer {
-  margin-top: 4px;
-  text-align: center;
-  font-size: 11px;
-  color: var(--ls-text-muted);
 }
 
 /* ── Theme: Dark (LoveSpark Noir) ─────────────────────── */
@@ -325,16 +123,90 @@ body.theme-slate {
   --ls-radius-sm: 4px;
 }
 
-/* ── Theme Tab ────────────────────────────────────────── */
+/* ── Theme Dropdown ───────────────────────────────────── */
+.theme-dropdown {
+  position: relative;
+  z-index: 100;
+  margin-left: auto;
+}
+
+.theme-dropdown-trigger {
+  background: var(--ls-glass);
+  border: 1px solid var(--ls-glass-border);
+  border-radius: var(--ls-radius-sm);
+  padding: 4px 10px;
+  font-size: 10px;
+  font-family: inherit;
+  color: var(--ls-text-dark);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.theme-dropdown-trigger:hover {
+  background: var(--ls-glass-strong);
+  box-shadow: var(--ls-glow);
+}
+
+.theme-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: var(--ls-glass-strong);
+  border: 1px solid var(--ls-glass-border);
+  border-radius: var(--ls-radius-sm);
+  backdrop-filter: blur(12px);
+  min-width: 140px;
+  padding: 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+}
+
+.theme-dropdown-menu.open { display: block; }
+
+.theme-dropdown-header {
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--ls-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 10px 4px;
+}
+
+.theme-option {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 7px 10px;
+  font-family: inherit;
+  font-size: 11px;
+  color: var(--ls-text-dark);
+  text-align: left;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+
+.theme-option:hover { background: var(--ls-glass); }
+.theme-option.active { color: var(--ls-pink-accent); font-weight: 500; }
+
 body { transition: background 0.3s ease, color 0.3s ease; }
 
-/* ===== Accessibility ===== */
+/* ── Pop animation ──────────────────────────────────── */
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.25); color: var(--ls-pink-deep); }
+  100% { transform: scale(1); }
+}
+.popping { animation: pop 0.35s ease; }
 
+/* ── Accessibility ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
