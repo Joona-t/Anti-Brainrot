@@ -3,6 +3,20 @@
  * Settings UI with grouped collapsible sections
  */
 
+// Dark mode
+browser.storage.local.get(['darkMode']).then(({ darkMode }) => {
+  document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : 'light');
+  const btn = document.getElementById('btnDarkMode');
+  if (btn) btn.textContent = darkMode ? '☀️' : '🌙';
+});
+function toggleTheme() {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  browser.storage.local.set({ darkMode: !isDark });
+  const btn = document.getElementById('btnDarkMode');
+  if (btn) btn.textContent = isDark ? '🌙' : '☀️';
+}
+
 const FEATURE_IDS = [
   'hideHomepage', 'hideSidebar', 'hideEndscreen', 'hideShorts', 'hideMix',
   'hideComments', 'hideDescription', 'hideLiveChat', 'hideMerch',
@@ -88,6 +102,8 @@ function showStatus() {
 
 function init() {
   loadSettings();
+
+  document.getElementById('btnDarkMode').addEventListener('click', toggleTheme);
 
   // Master toggle
   document.getElementById('masterToggle').addEventListener('change', () => {
