@@ -1,0 +1,45 @@
+/* lovespark-footer.css — Standalone footer styles
+   Canonical source: Extensions/infrastructure/lovespark-shared-lib/
+   Works with or without lovespark-base.css loaded (has fallbacks). */
+
+.ls-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 14px;
+  margin-top: 8px;
+  border-top: 1px solid var(--ls-glass-border, rgba(255, 255, 255, 0.3));
+  text-align: center;
+  font-family: var(--ls-font-body, 'DM Mono', monospace);
+}
+
+.ls-footer-suite {
+  font-size: 11px;
+  color: var(--ls-text-muted, #9E4D6E);
+  opacity: 0.85;
+}
+
+.ls-kofi-btn {
+  display: inline-block;
+  font-size: 11px;
+  font-family: inherit;
+  color: var(--ls-text-white, #fff);
+  background: var(--ls-pink-accent, #E8457C);
+  border: none;
+  border-radius: 999px;
+  padding: 5px 14px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ls-kofi-btn:hover {
+  opacity: 0.85;
+}
+
+.ls-footer-credit {
+  font-size: 10px;
+  color: var(--ls-text-muted, #9E4D6E);
+  opacity: 0.6;
+}
