@@ -123,6 +123,21 @@ body.theme-slate {
   --ls-radius-sm: 4px;
 }
 
+/* ── Theme Title Visibility ───────────────────────────── */
+body.theme-beige .title,
+body.theme-beige .header-title,
+body.theme-beige .logo-text,
+body.theme-beige .popup-header h1 {
+  color: #4a7c59;
+}
+
+body.theme-slate .title,
+body.theme-slate .header-title,
+body.theme-slate .logo-text,
+body.theme-slate .popup-header h1 {
+  color: #d4714e;
+}
+
 /* ── Theme Dropdown ───────────────────────────────────── */
 .theme-dropdown {
   position: relative;
@@ -193,6 +208,44 @@ body.theme-slate {
 .theme-option.active { color: var(--ls-pink-accent); font-weight: 500; }
 
 body { transition: background 0.3s ease, color 0.3s ease; }
+
+/* ── Author / Ko-fi Footer ─────────────────────────── */
+.ls-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 16px 12px;
+  margin-top: 6px;
+  border-top: 1px solid var(--ls-glass-border);
+  text-align: center;
+}
+
+.ls-footer-author {
+  font-size: 9.5px;
+  color: var(--ls-text-muted);
+  opacity: 0.85;
+}
+
+.ls-footer-tagline {
+  font-size: 9px;
+  color: var(--ls-text-muted);
+  opacity: 0.65;
+}
+
+.ls-footer-kofi {
+  font-size: 9.5px;
+  color: var(--ls-text-muted);
+  text-decoration: none;
+  opacity: 0.75;
+  transition: color 0.2s, opacity 0.2s;
+  margin-top: 2px;
+}
+
+.ls-footer-kofi:hover {
+  color: var(--ls-pink-accent);
+  opacity: 1;
+}
 
 /* ── Pop animation ──────────────────────────────────── */
 @keyframes pop {
