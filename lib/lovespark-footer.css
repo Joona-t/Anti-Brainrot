@@ -25,7 +25,7 @@
   font-size: 11px;
   font-family: inherit;
   color: var(--ls-text-white, #fff);
-  background: var(--ls-pink-accent, #E8457C);
+  background: var(--ls-pink-deep, #D63466);
   border: none;
   border-radius: 999px;
   padding: 5px 14px;
@@ -54,6 +54,13 @@
 
 .ls-bug-btn:hover {
   opacity: 0.7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-kofi-btn,
+  .ls-bug-btn {
+    transition-duration: 0.01ms !important;
+  }
 }
 
 .ls-footer-credit {

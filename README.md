@@ -125,5 +125,5 @@ Inspired by the Unhook extension. Built with love as part of the LoveSpark Suite
 
 ---
 
-**Version:** 2.0.0
+**Version:** 1.0.9
 **Last Updated:** February 2026

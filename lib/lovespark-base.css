@@ -90,7 +90,7 @@ body.theme-beige {
   --ls-pink-deep: #a86c56;
   --ls-white: #5c4a2a;
   --ls-text-dark: #5c4a2a;
-  --ls-text-muted: #8b6f47;
+  --ls-text-muted: #6b5630;
   --ls-text-white: #f5efe0;
   --ls-glow: 0 3px 12px rgba(139, 111, 71, 0.25);
   --ls-glow-strong: 0 3px 12px rgba(139, 111, 71, 0.4);
@@ -128,7 +128,7 @@ body.theme-beige .title,
 body.theme-beige .header-title,
 body.theme-beige .logo-text,
 body.theme-beige .popup-header h1 {
-  color: #4a7c59;
+  color: #3d5a2e;
 }
 
 body.theme-slate .title,
@@ -216,6 +216,20 @@ body { transition: background 0.3s ease, color 0.3s ease; }
   100% { transform: scale(1); }
 }
 .popping { animation: pop 0.35s ease; }
+
+/* ── Focus indicators (KI-006 systemic fix) ────────── */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible,
+[tabindex]:focus-visible,
+.toggle-wrap input:focus-visible + .toggle-track {
+  outline: 2px solid var(--ls-focus-ring, var(--ls-pink-accent));
+  outline-offset: 2px;
+}
 
 /* ── Accessibility ──────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
