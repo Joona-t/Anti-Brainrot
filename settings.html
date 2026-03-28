@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anti Brainrot — Settings</title>
+  <link rel="stylesheet" href="lib/lovespark-fonts.css">
+  <link rel="stylesheet" href="settings.css">
+  <link rel="stylesheet" href="lib/lovespark-footer.css">
+</head>
+<body>
+  <div class="settings-container" role="dialog" aria-labelledby="settingsTitle">
+
+    <header class="settings-header">
+      <img src="mascot.png" alt="Sparky — LoveSpark mascot" class="mascot" width="60" height="60">
+      <div>
+        <h1 class="header-title" id="settingsTitle">Anti Brainrot</h1>
+        <span class="header-sub">Settings</span>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2 class="card-title">&#x2699;&#xFE0F; Preferences</h2>
+      <div class="row-between">
+        <div>
+          <div class="setting-label">Reset all settings</div>
+          <div class="setting-desc">Restore all toggles to their default values</div>
+        </div>
+        <button id="resetBtn" class="btn-outline">Reset</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="card-title">&#x2139;&#xFE0F; About</h2>
+      <div class="about-row">
+        <span class="about-label">Version</span>
+        <span class="about-value" id="versionLabel">—</span>
+      </div>
+      <div class="about-row">
+        <span class="about-label">Made by</span>
+        <span class="about-value">Joona Tyrninoksa</span>
+      </div>
+      <div class="about-row">
+        <span class="about-label">License</span>
+        <span class="about-value">MIT — always free</span>
+      </div>
+      <div class="about-row">
+        <span class="about-label">Privacy</span>
+        <span class="about-value">No data collected. Ever.</span>
+      </div>
+      <div class="about-links">
+        <a href="https://lovespark.love/" target="_blank" rel="noopener noreferrer">LoveSpark Suite</a>
+        <a href="https://ko-fi.com/joonat" target="_blank" rel="noopener noreferrer">Support on Ko-fi</a>
+        <a href="mailto:joona@lovespark.love?subject=Bug Report — Anti Brainrot" rel="noopener noreferrer">Report a Bug</a>
+      </div>
+    </section>
+
+    <div class="status" id="status" role="status" aria-live="polite">Settings reset!</div>
+  </div>
+
+  <script src="lib/browser-polyfill.min.js"></script>
+  <script src="lib/lovespark-footer.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

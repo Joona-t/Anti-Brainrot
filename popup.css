@@ -66,6 +66,33 @@ body {
   font-size: 11px;
   color: var(--ls-text-white);
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ls-glass);
+  border: 1px solid var(--ls-glass-border);
+  border-radius: var(--ls-radius-sm);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.icon-btn:hover {
+  background: var(--ls-glass-strong);
+  box-shadow: var(--ls-glow);
 }
 
 /* ===== Master Toggle ===== */

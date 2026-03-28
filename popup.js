@@ -143,6 +143,14 @@ function init() {
   document.querySelectorAll('.group-header').forEach(btn => {
     btn.addEventListener('click', () => toggleGroup(btn));
   });
+
+  // Settings button
+  const settingsBtn = document.getElementById('settingsBtn');
+  if (settingsBtn) {
+    settingsBtn.addEventListener('click', () => {
+      browser.runtime.openOptionsPage();
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', init);
