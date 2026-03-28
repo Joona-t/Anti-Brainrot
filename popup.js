@@ -36,10 +36,6 @@ function applyTheme(t) {
   });
 }).catch(() => {});
 })();
-  if (!theme && darkMode) theme = 'dark';
-  applyTheme(theme || 'retro');
-});
-document.getElementById('themeToggle');
 
 const FEATURE_IDS = [
   'hideHomepage', 'hideSidebar', 'hideEndscreen', 'hideShorts', 'hideMix',
