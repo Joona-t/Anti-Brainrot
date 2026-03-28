@@ -1,7 +1,8 @@
 {
   "manifest_version": 3,
   "name": "__MSG_extName__",
-  "version": "1.0.9",
+  "version": "1.0.22",
+  "homepage_url": "https://lovespark.love",
   "description": "__MSG_extDescription__",
   "icons": {
     "16": "icons/icon16.png",

@@ -53,7 +53,7 @@
 }
 
 .ls-bug-btn:hover {
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -66,5 +66,5 @@
 .ls-footer-credit {
   font-size: 10px;
   color: var(--ls-text-muted, #9E4D6E);
-  opacity: 0.6;
+  opacity: 0.85;
 }

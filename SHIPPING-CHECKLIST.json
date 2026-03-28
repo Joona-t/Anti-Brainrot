@@ -1,0 +1,27 @@
+{
+  "extension": "__MSG_extName__",
+  "path": "/Users/darkfire/Claude x LoveSpark/Extensions/neurodivergent/Anti-Brainrot",
+  "timestamp": "2026-03-27T01:53:11",
+  "results": {
+    "privacy_policy_page": true,
+    "icons": true,
+    "mascot": true,
+    "promo_tile": true,
+    "description_quality": false,
+    "gecko": true,
+    "csp": true,
+    "mv3": true,
+    "chrome_zip": false,
+    "firefox_zip": false,
+    "no_innerHTML": true,
+    "permissions_ok": true,
+    "bugs_doc": true,
+    "ls_check_ran": true
+  },
+  "passed": 11,
+  "total_checks": 14,
+  "blockers": [
+    "CWS developer account submission (Joona)"
+  ],
+  "ship_ready": false
+}
