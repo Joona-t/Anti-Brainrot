@@ -1,0 +1,29 @@
+name: LoveSpark Quality Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run ls-check (strict)
+        run: |
+          python3 scripts/ls-check.py . --strict --json > ls-check-results.json 2>&1 || true
+          python3 scripts/ls-check.py . --strict
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ls-check-results
+          path: ls-check-results.json

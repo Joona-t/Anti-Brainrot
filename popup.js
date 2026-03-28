@@ -30,16 +30,11 @@ function applyTheme(t) {
     });
     document.addEventListener('click', () => menu.classList.remove('open'));
   }
-  browser.storage.local.get(['theme', 'darkMode']).then(({ theme, darkMode }) => {
-    if (!theme && darkMode) theme = 'dark';
+  browser.storage.local.get(['theme']).then(({ theme }) => {
     applyTheme(theme || 'retro');
   });
 }).catch(() => {});
 })();
-  if (!theme && darkMode) theme = 'dark';
-  applyTheme(theme || 'retro');
-});
-document.getElementById('themeToggle');
 
 const FEATURE_IDS = [
   'hideHomepage', 'hideSidebar', 'hideEndscreen', 'hideShorts', 'hideMix',
@@ -66,7 +61,8 @@ const DEFAULTS = {
   hideNotifications: false,
   hideAnnotations: true,
   hidePlaylist: false,
-  disableAutoplay: true
+  disableAutoplay: true,
+  darkMode: false
 };
 
 function loadSettings() {
@@ -125,6 +121,10 @@ function showStatus() {
 }
 
 function init() {
+  // Seed darkMode migration key if absent (lovespark-theme.js reads it)
+  browser.storage.local.get(['darkMode']).then(d => {
+    if (d.darkMode === undefined) browser.storage.local.set({ darkMode: false });
+  }).catch(() => {});
   loadSettings();
 
   // Master toggle

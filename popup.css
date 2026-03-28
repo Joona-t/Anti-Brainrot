@@ -147,7 +147,7 @@ body {
 }
 
 .setting.disabled {
-  opacity: 0.4;
+  opacity: 0.9;
   pointer-events: none;
 }
 
@@ -204,7 +204,7 @@ body {
 }
 
 input:checked + .slider {
-  background: var(--ls-pink-accent);
+  background: var(--ls-btn-bg);
   border-color: var(--ls-pink-accent);
   box-shadow: var(--ls-glow);
 }
@@ -214,7 +214,7 @@ input:checked + .slider::after {
 }
 
 input:disabled + .slider {
-  opacity: 0.4;
+  opacity: 0.9;
   cursor: not-allowed;
 }
 

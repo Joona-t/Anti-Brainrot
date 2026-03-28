@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anti Brainrot</title>
+  <link rel="stylesheet" href="lib/lovespark-base.css">
+  <link rel="stylesheet" href="lib/lovespark-tokens.css">
   <link rel="stylesheet" href="lib/lovespark-fonts.css">
   <link rel="stylesheet" href="popup.css">
   <link rel="stylesheet" href="lib/lovespark-footer.css">
 </head>
 <body>
-  <div class="popup-container">
+  <div class="popup-container" role="dialog" aria-labelledby="popupTitle">
 
     <header class="popup-header">
       <img src="mascot.png" alt="Sparky — LoveSpark mascot" class="mascot">
-      <span class="header-title">Anti Brainrot</span>
+      <span class="header-title" id="popupTitle">Anti Brainrot</span>
       <div class="theme-dropdown" id="themeDropdown">
       <button class="theme-dropdown-trigger" id="themeToggle">
         <span id="themeLabel">Retro Pink</span> ▾
@@ -226,7 +228,12 @@
 
   </div>
   <script src="lib/browser-polyfill.min.js"></script>
+  <script src="lib/lovespark-lifecycle.js"></script>
+  <script src="lib/lovespark-stats.js"></script>
+  <script src="lib/lovespark-badge.js"></script>
+  <script src="lib/lovespark-popup.js"></script>
   <script src="lib/lovespark-footer.js"></script>
-<script src="popup.js"></script>
+  <script src="lib/lovespark-theme.js"></script>
+  <script src="popup.js"></script>
 </body>
 </html>

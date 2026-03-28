@@ -14,9 +14,22 @@
   font-family: var(--ls-font-body, 'DM Mono', monospace);
 }
 
-.ls-footer-suite {
-  font-size: 11px;
-  color: var(--ls-text-muted, #9E4D6E);
+.ls-suite-btn {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--ls-text-white, #fff);
+  background: linear-gradient(135deg, var(--ls-pink-accent, #E8457C), var(--ls-pink-deep, #D63466));
+  border: none;
+  border-radius: 999px;
+  padding: 6px 18px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.ls-suite-btn:hover {
   opacity: 0.85;
 }
 
@@ -53,7 +66,7 @@
 }
 
 .ls-bug-btn:hover {
-  opacity: 0.7;
+  opacity: 0.85;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -66,5 +79,5 @@
 .ls-footer-credit {
   font-size: 10px;
   color: var(--ls-text-muted, #9E4D6E);
-  opacity: 0.6;
+  opacity: 0.85;
 }

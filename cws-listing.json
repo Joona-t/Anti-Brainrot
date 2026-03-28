@@ -1,0 +1,9 @@
+{
+  "name": "Anti Brainrot",
+  "summary": "Reclaim your YouTube focus by hiding Shorts, feeds, comments, and autoplay. Built for ADHD brains.",
+  "description": "YouTube is designed to keep you scrolling. Anti Brainrot gives you back control.\n\nIf you have ADHD, you know the trap: you open YouTube for one tutorial and surface three hours later in a Shorts spiral. The algorithm feeds on impulsivity, and willpower alone is not enough. Anti Brainrot removes the bait so you can use YouTube on your own terms.\n\nFEATURES\n\n- Hide the homepage feed, sidebar recommendations, and end screen suggestions\n- Block Shorts, Mix playlists, and autoplay completely\n- Hide comments, live chat, merch banners, and annotations\n- Granular toggles -- enable only the features you need\n- Collapsible feature groups for a clean popup\n- 4 cozy themes (Retro Pink, Dark, Beige, Slate)\n- Full keyboard and screen reader support\n\nPRIVACY\n\n- Zero data collection, no tracking, no ads\n- No account required -- everything stays in your browser\n- Open source (MIT license)\n\nPart of the LoveSpark suite -- free retro pink tools for neurodivergent minds.",
+  "category": "Productivity",
+  "keywords": ["ADHD", "YouTube focus", "neurodivergent", "distraction blocker", "open source"],
+  "version": "1.0.21",
+  "language": "en"
+}

@@ -2,141 +2,7 @@
    Canonical source: Extensions/infrastructure/lovespark-shared-lib/
    Copy to each extension's lib/ folder via scripts/sync-shared-lib.sh */
 
-:root {
-  /* Background gradient */
-  --ls-bg-pink-light: #FDCFE1;
-  --ls-bg-pink: #F9A8C9;
-  --ls-bg-pink-deep: #F48CAF;
-  --ls-bg-gradient: linear-gradient(165deg, #FDCFE1 0%, #F9A8C9 40%, #F48CAF 100%);
-
-  /* Frosted glass surfaces */
-  --ls-glass: rgba(255, 255, 255, 0.45);
-  --ls-glass-light: rgba(255, 255, 255, 0.25);
-  --ls-glass-border: rgba(255, 255, 255, 0.4);
-  --ls-glass-strong: rgba(255, 255, 255, 0.6);
-
-  /* Accents */
-  --ls-pink-accent: #E8457C;
-  --ls-pink-deep: #D63466;
-  --ls-white: #FFFFFF;
-  --ls-purple: #7C3AED;
-  --ls-teal: #0D9488;
-  --ls-blue: #818CF8;
-
-  /* Text */
-  --ls-text-dark: #5C1A36;
-  --ls-text-muted: #9E4D6E;
-  --ls-text-white: #FFFFFF;
-
-  /* Effects */
-  --ls-glow: 0 0 16px rgba(232, 69, 124, 0.3);
-  --ls-glow-strong: 0 0 24px rgba(232, 69, 124, 0.45);
-  --ls-glow-white: 0 0 16px rgba(255, 255, 255, 0.5);
-
-  /* Layout */
-  --ls-radius: 14px;
-  --ls-radius-sm: 10px;
-  --ls-font-body: 'DM Mono', monospace;
-  --ls-font-display: 'Press Start 2P', cursive;
-}
-
-/* ── Theme: Dark (LoveSpark Noir) ─────────────────────── */
-body.theme-dark {
-  --ls-bg-pink-light: #1a1128;
-  --ls-bg-pink: #110d1a;
-  --ls-bg-pink-deep: #0a0812;
-  --ls-bg-gradient: linear-gradient(165deg, #1a1128 0%, #110d1a 40%, #0a0812 100%);
-  --ls-glass: rgba(26, 15, 46, 0.85);
-  --ls-glass-light: rgba(26, 15, 46, 0.5);
-  --ls-glass-border: rgba(255, 110, 180, 0.13);
-  --ls-glass-strong: rgba(26, 15, 46, 0.95);
-  --ls-pink-accent: #ff6eb4;
-  --ls-pink-deep: #c2185b;
-  --ls-white: #f0e6f6;
-  --ls-text-dark: #f0e6f6;
-  --ls-text-muted: #9b7aac;
-  --ls-text-white: #ffffff;
-  --ls-glow: 0 0 20px rgba(255, 110, 180, 0.35), 0 0 60px rgba(255, 110, 180, 0.15);
-  --ls-glow-strong: 0 0 20px #ff6eb4, 0 0 40px rgba(255, 110, 180, 0.55);
-  --ls-glow-white: 0 0 16px rgba(240, 230, 246, 0.3);
-}
-
-body.theme-dark::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    radial-gradient(1px 1px at 8% 15%, #ffffff55 0%, transparent 100%),
-    radial-gradient(1px 1px at 25% 60%, #ff6eb430 0%, transparent 100%),
-    radial-gradient(1px 1px at 55% 8%, #ffffff33 0%, transparent 100%),
-    radial-gradient(2px 2px at 75% 45%, #ff9fd325 0%, transparent 100%),
-    radial-gradient(1px 1px at 88% 78%, #ffffff22 0%, transparent 100%),
-    radial-gradient(1px 1px at 40% 88%, #ff6eb425 0%, transparent 100%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Theme: Beige ─────────────────────────────────────── */
-body.theme-beige {
-  --ls-bg-pink-light: #f5efe0;
-  --ls-bg-pink: #f5efe0;
-  --ls-bg-pink-deep: #ede4ce;
-  --ls-bg-gradient: #f5efe0;
-  --ls-glass: #ede4ce;
-  --ls-glass-light: rgba(237, 228, 206, 0.6);
-  --ls-glass-border: #d4c4a0;
-  --ls-glass-strong: #e5dbc4;
-  --ls-pink-accent: #c4806a;
-  --ls-pink-deep: #a86c56;
-  --ls-white: #5c4a2a;
-  --ls-text-dark: #5c4a2a;
-  --ls-text-muted: #6b5630;
-  --ls-text-white: #f5efe0;
-  --ls-glow: 0 3px 12px rgba(139, 111, 71, 0.25);
-  --ls-glow-strong: 0 3px 12px rgba(139, 111, 71, 0.4);
-  --ls-glow-white: 0 3px 12px rgba(139, 111, 71, 0.15);
-  --ls-radius: 2px;
-  --ls-radius-sm: 2px;
-  --ls-font-body: 'Lora', Georgia, serif;
-}
-
-/* ── Theme: Slate ─────────────────────────────────────── */
-body.theme-slate {
-  --ls-bg-pink-light: #1e1e1e;
-  --ls-bg-pink: #1e1e1e;
-  --ls-bg-pink-deep: #252525;
-  --ls-bg-gradient: #1e1e1e;
-  --ls-glass: #252525;
-  --ls-glass-light: #2d2d2d;
-  --ls-glass-border: #4a4a4a;
-  --ls-glass-strong: #383838;
-  --ls-pink-accent: #d4714e;
-  --ls-pink-deep: #e8926e;
-  --ls-white: #ececec;
-  --ls-text-dark: #ececec;
-  --ls-text-muted: #9a9a9a;
-  --ls-text-white: #ececec;
-  --ls-glow: 0 2px 8px rgba(0, 0, 0, 0.25);
-  --ls-glow-strong: 0 2px 8px rgba(0, 0, 0, 0.4);
-  --ls-glow-white: 0 2px 8px rgba(0, 0, 0, 0.15);
-  --ls-radius: 5px;
-  --ls-radius-sm: 4px;
-}
-
-/* ── Theme Title Visibility ───────────────────────────── */
-body.theme-beige .title,
-body.theme-beige .header-title,
-body.theme-beige .logo-text,
-body.theme-beige .popup-header h1 {
-  color: #3d5a2e;
-}
-
-body.theme-slate .title,
-body.theme-slate .header-title,
-body.theme-slate .logo-text,
-body.theme-slate .popup-header h1 {
-  color: #d4714e;
-}
+@import url('lovespark-tokens.css');
 
 /* ── Theme Dropdown ───────────────────────────────────── */
 .theme-dropdown {
@@ -216,6 +82,11 @@ body { transition: background 0.3s ease, color 0.3s ease; }
   100% { transform: scale(1); }
 }
 .popping { animation: pop 0.35s ease; }
+
+/* ── Touch targets (WCAG / CLAUDE.md: min 32px) ───── */
+button, input, select, textarea, [role="button"] {
+  min-height: 32px;
+}
 
 /* ── Focus indicators (KI-006 systemic fix) ────────── */
 button:focus-visible,

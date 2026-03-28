@@ -1,0 +1,51 @@
+name: Weekly Contrast Audit
+
+on:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_dispatch:
+
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run contrast audit
+        id: audit
+        run: |
+          python3 scripts/audit-contrast.py --verbose --history 2>&1 | tee contrast-results.txt
+          if grep -q 'FAIL' contrast-results.txt; then
+            echo "has_failures=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_failures=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create issue on failure
+        if: steps.audit.outputs.has_failures == 'true'
+        env:
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = fs.readFileSync('contrast-results.txt', 'utf8');
+            const failLines = results.split('\n').filter(l => l.includes('FAIL'));
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Contrast regression detected — ${new Date().toISOString().split('T')[0]}`,
+              body: `## Weekly Contrast Audit Found Failures\n\n\`\`\`\n${failLines.join('\n')}\n\`\`\`\n\nFull results in [workflow run](${process.env.RUN_URL}).`,
+              labels: ['accessibility', 'automated']
+            });
+
+      - name: Upload results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: contrast-audit-results
+          path: contrast-results.txt
