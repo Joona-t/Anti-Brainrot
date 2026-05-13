@@ -104,7 +104,7 @@ body {
 }
 
 .btn-outline:hover {
-  background: var(--ls-pink-accent);
+  background: var(--ls-pink-deep);
   color: var(--ls-text-white);
 }
 
@@ -145,7 +145,7 @@ body {
 }
 
 .about-links a:hover {
-  opacity: 0.7;
+  filter: brightness(0.85);
 }
 
 .status {

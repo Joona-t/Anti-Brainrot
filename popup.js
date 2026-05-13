@@ -1,5 +1,5 @@
 /**
- * Anti Brainrot v1.0.3 — Popup Script
+ * Anti Brainrot v1.0.12 — Popup Script
  * Settings UI with grouped collapsible sections
  */
 
@@ -30,11 +30,9 @@ function applyTheme(t) {
     });
     document.addEventListener('click', () => menu.classList.remove('open'));
   }
-  browser.storage.local.get(['theme', 'darkMode']).then(({ theme, darkMode }) => {
-    if (!theme && darkMode) theme = 'dark';
+  browser.storage.local.get(['theme']).then(({ theme }) => {
     applyTheme(theme || 'retro');
-  });
-}).catch(() => {});
+  }).catch(() => {});
 })();
 
 const FEATURE_IDS = [
@@ -149,7 +147,8 @@ function init() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', init);
-
-/* ── Author / Ko-fi Footer ── */
-document.body.insertAdjacentHTML('beforeend', LoveSparkFooter.render());
+document.addEventListener('DOMContentLoaded', () => {
+  init();
+  /* ── Author / Ko-fi Footer ── */
+  document.body.insertAdjacentHTML('beforeend', LoveSparkFooter.render());
+});

@@ -17,7 +17,6 @@ const DEFAULTS = {
   hideAnnotations: true,
   hidePlaylist: false,
   disableAutoplay: true,
-  darkMode: false,
   theme: 'retro'
 };
 

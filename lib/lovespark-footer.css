@@ -23,7 +23,7 @@
 }
 
 .ls-suite-btn:hover {
-  opacity: 0.75;
+  text-decoration: underline;
 }
 
 .ls-kofi-btn {

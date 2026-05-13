@@ -174,7 +174,7 @@ body {
 }
 
 .setting.disabled {
-  opacity: 0.4;
+  filter: grayscale(0.5) brightness(0.7);
   pointer-events: none;
 }
 
@@ -241,7 +241,7 @@ input:checked + .slider::after {
 }
 
 input:disabled + .slider {
-  opacity: 0.4;
+  filter: grayscale(0.5) brightness(0.7);
   cursor: not-allowed;
 }
 
