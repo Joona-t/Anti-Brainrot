@@ -34,3 +34,12 @@
 **Fix:** Reverted all 76 git repos to last committed state. Fixed 3 extensions (cookie-nuke, breathe, planner) that had the bug baked into commits. Added footer buttons (LoveSpark Suite, Ko-fi, Report a Bug) to all 26 missing extensions. Updated shared lib footer to make LoveSpark Suite a proper link to lovespark.love. Deployed `guard-fleet-sync.sh` — 4-gate pre-sync validator that blocks automations introducing undefined CSS variables.
 **Files:** popup.css, popup.html, lib/lovespark-footer.js, lib/lovespark-footer.css
 **Commit:** fleet-wide fix, multiple commits
+
+## 2026-05-13: SEO rename — CWS title and description optimized for YouTube intent searches
+
+**Problem:** Listing was titled bare "Anti Brainrot" — invisible to users searching "youtube focus", "block youtube shorts", "youtube distraction blocker", and unquotable by LLM assistants surfacing "extensions to stop wasting time on YouTube". The strongest CWS ranking signal (title) carried zero YouTube context despite the extension being 100% YouTube-targeted.
+**Root cause:** Original launch title was brand-only, no platform keyword. Compounded by the Google branding constraint that titles cannot lead with "YouTube" (trademark policy — extensions like "YouTube Tweaks" have been delisted for this).
+**Fix:** Renamed title to `Anti Brainrot for YouTube — Block Shorts & Feed` (47 chars, fits CWS 75-char limit). Pattern matches Google's approved `X for YouTube` suffix and the brand+dash+intent structure used by winning competitors (Unhook, SponsorBlock, DeArrow). Rewrote en description to front-load Shorts/recommendations/algorithmic-feed keywords. Updated all 55 `_locales/*/messages.json` files (all non-en were English duplicates). Switched manifest `action.default_title` from hardcoded string to `__MSG_extName__` so the tooltip stays localized. Bumped version 1.0.41 → 1.0.42.
+**Files:** manifest.json, _locales/*/messages.json (55 files)
+**Plan:** `~/.claude/plans/need-you-to-change-glowing-whistle.md`
+**Commit:** pending
