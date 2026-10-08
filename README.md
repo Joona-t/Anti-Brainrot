@@ -1,3 +1,5 @@
+> **📦 Moved.** This extension now lives in the LoveSpark monorepo: **[Joona-t/lovespark-extensions/neurodivergent/anti-brainrot](https://github.com/Joona-t/lovespark-extensions/tree/main/neurodivergent/anti-brainrot)** (full history kept). This repo is archived and read-only.
+
 # Anti Brainrot
 
 **Reclaim your focus by removing YouTube's algorithmic distractions**
